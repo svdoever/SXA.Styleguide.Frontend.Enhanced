@@ -1,0 +1,29 @@
+{
+    "compilerOptions": {
+        "module": "CommonJS",
+        "target": "es5", /* Specify ECMAScript target version */
+        "rootDir": "./", /* ts source directory */
+        "outDir": "scripts", /* where to compile javascript files */
+        "noImplicitAny": true,
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "isolatedModules": false,
+        "allowJs": true,
+        "esModuleInterop": true,
+        "sourceMap": true,
+        "jsx": "react",
+        "noEmit": false
+    },
+    "typeRoots": [
+        "node_modules/@types",
+        "types"
+    ],
+    "include": [
+        "sources/**/*.ts",
+        "react-app/**/*.tsx"
+    ],
+    "exclude": [
+        "node_modules",
+        "**/*.spec.ts"
+    ]
+}
