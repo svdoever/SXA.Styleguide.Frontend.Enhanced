@@ -1,20 +1,17 @@
+@import "../defaulttheme/sass/abstracts/vars";
+@import "../defaulttheme/sass/abstracts/mixins";
+@import "../defaulttheme/sass/abstracts/functions";
+@import "../defaulttheme/sass/base/fonts/fonts";
+@import "../defaulttheme/sass/base/fontawesome/font-awesome";
+
+// Override vars as defined in vars above
+@import "./theme/sass/theme-vars.scss";
+
+// Custom version of the theme main.scss
 @import "./theme/sass/main.scss";
-@import "./theme.scss";
 
-// Overwriting colors, margins and fontSizes already used in main.scss with theme values
-body {
-    background: $page-bg;
-    &.on-page-editor {
-        background: $page-bg-editor !important;
-    }
-}
-
-a {
-    color: $text-basic;
-    &:hover {
-        color: $text-basic-active;
-    }
-}
+// Cascading theme-specific overrides
+@import "./theme/sass/theme-overrides.scss";
 
 // component overwrites
 @import "./theme/sass/component-container.scss";
