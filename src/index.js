@@ -22,6 +22,38 @@ const uploadFilesGlob = ['scripts/**/*', 'styles/**/*', 'fonts/**/*', 'images/**
 
 gulpTaskInit();
 
+// Fix the wildcard imports of the sass copied from the SXA.Styleguide.Frontend.Enhanced front-end project of Mark van Aalst.
+// The provided sass which is an updated version of the Sitecore default theme is not valid sass - top-level wildcard imports 
+// initially handled by gulp-sass-bulk-import but does not work over multiple levels.
+// Fix location of "base/.." folder - must be relative due to new build approach using webpack
+gulp.task('fix-styleguidetheme-sass-for-webpack', function() {
+  gulp
+    .src('sources/theme/sass/*.scss')
+    .pipe(bulkSass())
+    // make @import path relative to sass folder
+    .pipe(gulpReplace(path.join(__dirname, 'sources/theme/sass/').replace(/\\/g,'/'), './'))
+    .pipe( gulp.dest('sources/theme/sass/') );
+
+  gulp
+    .src('sources/theme/sass/*/*.scss')
+    .pipe(gulpReplace('"base/', '"../base/'))
+    .pipe( gulp.dest('sources/theme/sass/') );
+  
+  gulp
+    .src('sources/theme/sass/*/*/*.scss')
+    .pipe(gulpReplace('"base/', '"../../base/'))
+    .pipe( gulp.dest('sources/theme/sass/') );
+  
+  // Specifix fixes
+
+  // sources/theme/sass/variants/*/*.scss: direct reference to @import "abstracts/xyz",
+  // instead of ../../abstracts/xyz
+  gulp
+    .src('sources/theme/sass/variants/*/*.scss')
+    .pipe(gulpReplace('"abstracts', '"../../abstracts'))
+    .pipe( gulp.dest('sources/theme/sass/variants') );
+});
+
 // Fix the wildcard imports of the sass copied from the Sitecore default theme provided in @sxa/Theme.
 // The provided sass is not valid sass - top-level wildcard imports initially handled by gulp-sass-bulk-import
 // but does not work over multiple levels.

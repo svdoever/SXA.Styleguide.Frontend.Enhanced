@@ -25,6 +25,8 @@
     "clean": "rimraf jsdoc styles scripts images/sprite-flag.png",
     "create-fixed-defaulttheme-sass-for-webpack": "rimraf defaulttheme && copyfiles --all --up 3 ./node_modules/@sxa/Theme/sass/** ./defaulttheme && gulp -- fix-defaulttheme-sass-for-webpack",
     "fix-defaulttheme-sass-for-webpack": "gulp -- fix-defaulttheme-sass-for-webpack",
+    "create-fixed-styleguidetheme-sass-for-webpack": "rimraf sources/theme/sass && copyfiles --all --up 2 ../sass-styleguide-theme/sass/** sources/theme && gulp -- fix-styleguidetheme-sass-for-webpack",
+    "fix-styleguidetheme-sass-for-webpack": "gulp -- fix-styleguidetheme-sass-for-webpack",
     "publish-theme": "powershell ./publish-theme.ps1",
     "-- INTERNAL BUILD SCRIPTS --": "---------------------------",
     "build:sprite-flag": "gulp -- sprite-flag",
